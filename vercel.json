@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://qtecdj.github.io/tsv-pfingstturnier-2026/$1",
+      "permanent": false
+    }
+  ]
+}
