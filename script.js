@@ -2,11 +2,14 @@
   // Countdown zum ersten Turniertag. Die Werte bleiben bewusst im Markup,
   // damit die Turnierleitung das Datum spaeter leicht anpassen kann.
   const countdown = document.querySelector("[data-countdown]");
+  const countdownLabel = document.querySelector("[data-countdown-label]");
+  const liveTicker = document.querySelector("[data-live-ticker]");
   const time = {
     day: 1000 * 60 * 60 * 24,
     hour: 1000 * 60 * 60,
     minute: 1000 * 60,
   };
+  let liveTickerLoadedAt = 0;
 
   function writeCountdownValue(selector, value) {
     const node = countdown?.querySelector(selector);
@@ -17,23 +20,111 @@
     if (!countdown) return;
 
     const target = new Date(countdown.dataset.countdown).getTime();
-    const distance = Math.max(0, target - Date.now());
+    const now = Date.now();
+    const distance = Math.max(0, target - now);
 
     writeCountdownValue("[data-days]", Math.floor(distance / time.day));
     writeCountdownValue("[data-hours]", Math.floor((distance % time.day) / time.hour));
     writeCountdownValue("[data-minutes]", Math.floor((distance % time.hour) / time.minute));
     writeCountdownValue("[data-seconds]", Math.floor((distance % time.minute) / 1000));
+
+    if (distance === 0) showLiveTicker(now);
+  }
+
+  function scoreText(match) {
+    const home = Number.isFinite(match.homeGoals) ? match.homeGoals : "-";
+    const away = Number.isFinite(match.awayGoals) ? match.awayGoals : "-";
+    return `${home} : ${away}`;
+  }
+
+  function formatTickerTime(value) {
+    if (!value) return "";
+    return new Intl.DateTimeFormat("de-DE", {
+      day: "2-digit",
+      month: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    }).format(new Date(value));
+  }
+
+  function pickTickerMatch(matches, now) {
+    const sorted = [...matches].sort((a, b) => new Date(a.time) - new Date(b.time));
+    const live = sorted.find((match) => {
+      const start = new Date(match.time).getTime();
+      const end = start + 60 * 60 * 1000;
+      return match.status === "live" || (now >= start && now <= end);
+    });
+
+    return live || sorted.find((match) => new Date(match.time).getTime() >= now) || sorted.at(-1);
+  }
+
+  function writeLiveTicker(data) {
+    if (!liveTicker) return;
+
+    const matches = Array.isArray(data.matches) ? data.matches : [];
+    const match = pickTickerMatch(matches, Date.now()) || {};
+    const status = liveTicker.querySelector("[data-live-status]");
+    const home = liveTicker.querySelector("[data-live-home]");
+    const away = liveTicker.querySelector("[data-live-away]");
+    const score = liveTicker.querySelector("[data-live-score]");
+    const note = liveTicker.querySelector("[data-live-note]");
+    const updated = liveTicker.querySelector("[data-live-updated]");
+
+    const isLive = match.status === "live";
+    status.textContent = isLive ? "Live" : "Ticker bereit";
+    home.textContent = match.home || "Spielplan";
+    away.textContent = match.away || "folgt";
+    score.textContent = scoreText(match);
+    note.textContent = match.note || data.message || "Sobald echte Ergebnisse vorliegen, werden sie hier angezeigt.";
+    updated.textContent = data.lastUpdated
+      ? `Stand: ${formatTickerTime(data.lastUpdated)} | Quelle: TSV Plattenhardt`
+      : "Quelle: TSV Plattenhardt";
+  }
+
+  async function loadLiveTicker(force = false) {
+    if (!liveTicker) return;
+    const now = Date.now();
+    if (!force && now - liveTickerLoadedAt < 30000) return;
+    liveTickerLoadedAt = now;
+
+    try {
+      const response = await fetch(`liveticker.json?v=${Math.floor(now / 30000)}`, { cache: "no-store" });
+      if (!response.ok) throw new Error("Live-Ticker konnte nicht geladen werden.");
+      writeLiveTicker(await response.json());
+    } catch (error) {
+      writeLiveTicker({
+        lastUpdated: new Date().toISOString(),
+        message: "Der Live-Ticker ist vorbereitet, die Ergebnisdatei konnte gerade aber nicht geladen werden.",
+        matches: [{ home: "Live-Ticker", away: "wartet", homeGoals: null, awayGoals: null }],
+      });
+    }
+  }
+
+  function showLiveTicker(now) {
+    if (!liveTicker) return;
+    countdown.hidden = true;
+    liveTicker.hidden = false;
+    if (countdownLabel) countdownLabel.textContent = "Live am Weilerhau";
+    loadLiveTicker(now === undefined);
   }
 
   function activatePanel(tab) {
     const targetPanel = document.getElementById(tab.dataset.day);
     if (!targetPanel) return;
 
-    document.querySelectorAll(".tab").forEach((button) => button.classList.remove("active"));
-    document.querySelectorAll(".fixtures").forEach((panel) => panel.classList.remove("active"));
+    document.querySelectorAll(".tab").forEach((button) => {
+      button.classList.remove("active");
+      button.setAttribute("aria-selected", "false");
+    });
+    document.querySelectorAll(".fixtures").forEach((panel) => {
+      panel.classList.remove("active");
+      panel.hidden = true;
+    });
 
     tab.classList.add("active");
+    tab.setAttribute("aria-selected", "true");
     targetPanel.classList.add("active");
+    targetPanel.hidden = false;
   }
 
   function protectVisualAssets() {
@@ -85,6 +176,133 @@
 
     updateButton();
     window.addEventListener("scroll", updateButton, { passive: true });
+  }
+
+  function setupAccessibilityTools() {
+    const panel = document.querySelector("[data-accessibility-panel]");
+    const toggle = document.querySelector("[data-accessibility-toggle]");
+    const reset = document.querySelector("[data-accessibility-reset]");
+    const readButton = document.querySelector("[data-read-page]");
+    const stopButton = document.querySelector("[data-stop-reading]");
+    const status = document.querySelector("[data-accessibility-status]");
+    const options = document.querySelectorAll("[data-accessibility-option]");
+    if (!panel || !toggle) return;
+
+    const classNames = {
+      largeText: "accessibility-large-text",
+      highContrast: "accessibility-high-contrast",
+      reducedMotion: "accessibility-reduced-motion",
+    };
+    const storageKey = "tsv-accessibility";
+    let readingWasStopped = false;
+
+    function readSettings() {
+      try {
+        return JSON.parse(localStorage.getItem(storageKey)) || {};
+      } catch (error) {
+        return {};
+      }
+    }
+
+    function writeSettings(settings) {
+      localStorage.setItem(storageKey, JSON.stringify(settings));
+    }
+
+    function applySettings(settings) {
+      Object.entries(classNames).forEach(([key, className]) => {
+        document.body.classList.toggle(className, Boolean(settings[key]));
+      });
+
+      options.forEach((input) => {
+        input.checked = Boolean(settings[input.dataset.accessibilityOption]);
+      });
+    }
+
+    function setPanelState(isOpen) {
+      panel.hidden = !isOpen;
+      toggle.setAttribute("aria-expanded", String(isOpen));
+    }
+
+    function announce(message) {
+      if (status) status.textContent = message;
+    }
+
+    function readableText() {
+      const main = document.querySelector("main");
+      if (!main) return "";
+
+      return [...main.querySelectorAll("h1, h2, h3, p, time, .eyebrow, .team-card h4, .match-team b")]
+        .map((node) => node.textContent.trim())
+        .filter(Boolean)
+        .join(". ")
+        .replace(/\s+/g, " ");
+    }
+
+    function startReading() {
+      if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
+        announce("Die Vorlese-Funktion wird von diesem Browser nicht unterstuetzt.");
+        return;
+      }
+
+      const text = readableText();
+      if (!text) {
+        announce("Es wurde kein lesbarer Seiteninhalt gefunden.");
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+      readingWasStopped = false;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "de-DE";
+      utterance.rate = 0.95;
+      announce("Vorlesen wird vorbereitet.");
+      utterance.onstart = () => announce("Vorlesen gestartet.");
+      utterance.onend = () => announce("Vorlesen beendet.");
+      utterance.onerror = () => {
+        if (!readingWasStopped) announce("Vorlesen konnte nicht gestartet werden.");
+      };
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function stopReading() {
+      readingWasStopped = true;
+      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+      announce("Vorlesen gestoppt.");
+    }
+
+    let settings = readSettings();
+    applySettings(settings);
+
+    toggle.addEventListener("click", () => {
+      setPanelState(toggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    options.forEach((input) => {
+      input.addEventListener("change", () => {
+        settings = { ...settings, [input.dataset.accessibilityOption]: input.checked };
+        writeSettings(settings);
+        applySettings(settings);
+      });
+    });
+
+    reset?.addEventListener("click", () => {
+      settings = {};
+      localStorage.removeItem(storageKey);
+      applySettings(settings);
+      announce("Barrierefreiheits-Einstellungen wurden zurueckgesetzt.");
+    });
+
+    readButton?.addEventListener("click", startReading);
+    stopButton?.addEventListener("click", stopReading);
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setPanelState(false);
+    });
+
+    document.addEventListener("click", (event) => {
+      if (panel.hidden || panel.contains(event.target) || toggle.contains(event.target)) return;
+      setPanelState(false);
+    });
   }
 
   const teamProfiles = {
@@ -375,6 +593,7 @@
 
   setupMobileMenu();
   setupScrollTop();
+  setupAccessibilityTools();
   setupTeamDialog();
   protectVisualAssets();
   updateCountdown();

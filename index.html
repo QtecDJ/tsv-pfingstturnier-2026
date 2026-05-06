@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <a class="skip-link" href="#turnier">Zum Inhalt springen</a>
     <!-- Kopfbereich: kurz, vereinsnah und auf schnelle Navigation am Turnierwochenende ausgelegt. -->
     <header class="site-header" aria-label="Hauptnavigation">
       <a class="brand" href="#top" aria-label="Startseite Pfingstturnier">
@@ -34,9 +35,9 @@
         <a href="#besuch">Besuch</a>
       </nav>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menue oeffnen">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
       </button>
       <a class="header-cta" href="mailto:Geschaeftsstelle@tsvplattenhardt.de">Kontakt</a>
       <div class="mobile-menu" id="mobile-menu" hidden>
@@ -49,6 +50,36 @@
         <a href="mailto:Geschaeftsstelle@tsvplattenhardt.de">Kontakt</a>
       </div>
     </header>
+
+    <section class="accessibility-tools" aria-label="Barrierefreiheit">
+      <button class="accessibility-trigger" type="button" aria-expanded="false" aria-controls="accessibility-panel" aria-label="Barrierefreiheit einstellen" data-accessibility-toggle>
+        <span aria-hidden="true">Aa</span>
+        <span class="sr-only">Barrierefreiheit einstellen</span>
+      </button>
+      <div class="accessibility-panel" id="accessibility-panel" role="region" aria-labelledby="accessibility-title" data-accessibility-panel hidden>
+        <h2 id="accessibility-title">Barrierefreiheit</h2>
+        <p>Stelle die Seite so ein, wie sie fuer dich angenehmer lesbar ist. Die Funktionen sind tastaturbedienbar und fuer Screenreader beschriftet.</p>
+        <label>
+          <input type="checkbox" data-accessibility-option="largeText">
+          Groessere Schrift
+        </label>
+        <label>
+          <input type="checkbox" data-accessibility-option="highContrast">
+          Hoher Kontrast
+        </label>
+        <label>
+          <input type="checkbox" data-accessibility-option="reducedMotion">
+          Bewegung reduzieren
+        </label>
+        <div class="read-aloud-actions" aria-label="Vorlese-Funktion">
+          <button type="button" data-read-page>Seite vorlesen</button>
+          <button type="button" data-stop-reading>Stoppen</button>
+        </div>
+        <p class="accessibility-standard">Orientiert an EN 301 549 und WCAG 2.2 AA.</p>
+        <p class="sr-only" aria-live="polite" data-accessibility-status></p>
+        <button class="accessibility-reset" type="button" data-accessibility-reset>Zuruecksetzen</button>
+      </div>
+    </section>
 
     <main id="top">
       <!-- Hero mit TSV-Bildsprache: Der Platz im Weilerhau soll sofort als Ort des Turniers erkennbar sein. -->
@@ -99,12 +130,22 @@
         </div>
         <aside class="hero-card" aria-label="Turnierdaten">
           <img src="assets/logos/tsv-plattenhardt.jpg" alt="">
-          <span class="countdown-kicker">Anpfiff in</span>
-          <div class="count-grid" data-countdown="2026-05-23T11:00:00+02:00">
+          <span class="countdown-kicker" data-countdown-label>Anpfiff in</span>
+          <div class="count-grid" data-countdown="2026-05-23T11:00:00+02:00" aria-live="polite" role="timer">
             <span><b data-days>0</b>Tage</span>
             <span><b data-hours>0</b>Std</span>
             <span><b data-minutes>0</b>Min</span>
             <span><b data-seconds>0</b>Sek</span>
+          </div>
+          <div class="live-ticker-card" data-live-ticker hidden aria-live="polite" aria-label="Live-Ticker">
+            <span class="ticker-state" data-live-status>Live-Ticker bereit</span>
+            <div class="live-scoreboard">
+              <strong data-live-home>Spielplan</strong>
+              <b data-live-score>- : -</b>
+              <strong data-live-away>folgt</strong>
+            </div>
+            <p data-live-note>Der Live-Ticker erscheint automatisch nach Turnierstart.</p>
+            <small data-live-updated></small>
           </div>
           <strong>23.-25. Mai 2026</strong>
           <p>Sportgelaende Im Weilerhau, 70794 Filderstadt</p>
@@ -251,12 +292,12 @@
           <p>Die Gruppenphase entscheidet die Ausgangslage. Danach fuehrt der Weg ueber die Finalrunde bis zum Endspiel am Pfingstmontag.</p>
         </div>
         <div class="matchday-switch" role="tablist" aria-label="Turnierbereich auswaehlen">
-          <button class="tab active" type="button" data-day="day-1">Gruppen</button>
-          <button class="tab" type="button" data-day="day-2">KO-Phase</button>
-          <button class="tab" type="button" data-day="day-3">Finaltag</button>
+          <button class="tab active" type="button" data-day="day-1" aria-controls="day-1" aria-selected="true">Gruppen</button>
+          <button class="tab" type="button" data-day="day-2" aria-controls="day-2" aria-selected="false">KO-Phase</button>
+          <button class="tab" type="button" data-day="day-3" aria-controls="day-3" aria-selected="false">Finaltag</button>
         </div>
 
-        <div class="fixtures active" id="day-1">
+        <div class="fixtures active" id="day-1" role="tabpanel">
           <div class="group-stage">
             <article>
               <span>Gruppe A</span>
@@ -271,7 +312,7 @@
           </div>
         </div>
 
-        <div class="fixtures" id="day-2">
+        <div class="fixtures" id="day-2" role="tabpanel" hidden>
           <div class="bracket" aria-label="Turnierbaum KO-Phase">
             <section class="bracket-round">
               <h3>Viertelfinale</h3>
@@ -327,7 +368,7 @@
           </div>
         </div>
 
-        <div class="fixtures" id="day-3">
+        <div class="fixtures" id="day-3" role="tabpanel" hidden>
           <div class="final-day">
             <article><span>Platzierung</span><b>Jedes Team spielt seinen Abschluss</b><p>Auch die Platzierungsspiele gehoeren zum Turnier: fair, sportlich und mit voller Wertung bis zum letzten Spiel.</p></article>
             <article><span>Endspiel</span><b>Der Hoehepunkt am Pfingstmontag</b><p>Im Finale entscheidet sich, wer den Pokal des 53. Internationalen Jugendfussballturniers gewinnt.</p></article>
@@ -361,7 +402,7 @@
               <img src="assets/events/80s-90s-schlager.png" alt="80s 90s meets Schlager Party">
             </div>
             <div class="event-body">
-              <time>Samstag, 23. Mai 2026 Â· 20:00 Uhr</time>
+              <time>Samstag, 23. Mai 2026 &middot; 20:00 Uhr</time>
               <h3>80s/90s meets Schlager</h3>
               <p>Nach dem Auftakt auf dem Platz geht es musikalisch weiter. 80er, 90er und Schlager sorgen fuer den ersten grossen Turnierabend.</p>
               <span>Eintritt laut Veranstaltungsseite: 5 Euro</span>
@@ -373,7 +414,7 @@
               <img src="assets/events/fillys-beachparty.png" alt="Filly's Beachparty">
             </div>
             <div class="event-body">
-              <time>Sonntag, 24. Mai 2026 Â· 20:00 Uhr</time>
+              <time>Sonntag, 24. Mai 2026 &middot; 20:00 Uhr</time>
               <h3>Filly's Beachparty</h3>
               <p>Der Sonntagabend bringt Beachparty-Stimmung nach Plattenhardt. Nach den Spielen wird das Sportgelaende zur Sommernacht im TSV-Stil.</p>
               <span>Abendveranstaltung am Sportgelaende</span>
@@ -440,7 +481,7 @@
     </footer>
 
     <button class="scroll-top" type="button" aria-label="Nach oben scrollen" hidden>
-      <span aria-hidden="true">â†‘</span>
+      <span aria-hidden="true">&#8593;</span>
     </button>
 
     <script src="script.js"></script>

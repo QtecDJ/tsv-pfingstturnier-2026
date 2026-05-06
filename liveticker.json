@@ -1,0 +1,17 @@
+{
+  "source": "https://www.tsvplattenhardt.de/pfingstturnier",
+  "lastUpdated": "2026-05-06T10:30:00+02:00",
+  "message": "Der offizielle Spielplan und echte Live-Ergebnisse fuer 2026 sind noch nicht veroeffentlicht. Sobald die Turnierleitung Daten bereitstellt, kann diese Datei mit Paarungen und Toren aktualisiert werden.",
+  "matches": [
+    {
+      "id": "turnierstart",
+      "status": "scheduled",
+      "time": "2026-05-23T11:00:00+02:00",
+      "home": "U16-Pfingstturnier",
+      "away": "Spielplan folgt",
+      "homeGoals": null,
+      "awayGoals": null,
+      "note": "Live-Ticker bereit. Echte Paarungen und Tore werden angezeigt, sobald sie in liveticker.json gepflegt sind."
+    }
+  ]
+}
