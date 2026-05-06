@@ -87,12 +87,295 @@
     window.addEventListener("scroll", updateButton, { passive: true });
   }
 
+  const teamProfiles = {
+    "sv-horn": {
+      kicker: "Gruppe A | U16 Oesterreich",
+      country: "Oesterreich",
+      summary: "Die U16 des SV Horn gehoert zur Nachwuchsarbeit des Vereins aus Niederoesterreich. Fuer das Pfingstturnier ist vor allem dieser Jahrgang relevant: Spieler im B-Junioren-Alter, die in Horn in einem leistungsorientierten Nachwuchsumfeld ausgebildet werden.",
+      facts: [
+        ["Altersklasse", "U16 / Jahrgang 2010"],
+        ["Nachwuchsraum", "Niederoesterreich"],
+        ["Teambezug", "SV-Horn-Nachwuchs"],
+      ],
+      strengths: [
+        "U16-Spieler aus einem oesterreichischen Nachwuchsverbund bringen einen anderen Spielrhythmus in die Gruppe.",
+        "Der Jahrgang ist an regionale Nachwuchswettbewerbe und kompakte Turnierspiele gewoehnt.",
+        "Fuer die TSV-Gegner ist Horn in der U16 ein internationaler Vergleich, kein Alltagsgegner.",
+      ],
+      sources: [
+        ["SV Horn", "https://www.svhorn.at/"],
+        ["Vereinsgeschichte", "https://www.svhorn.at/verein/geschichte"],
+      ],
+    },
+    "kas-eupen": {
+      kicker: "Gruppe A | U16 Belgien",
+      country: "Belgien",
+      summary: "Die KAS Eupen U16 ist Teil der Panda-Youngsters-Struktur. Auf dieser Altersstufe geht es um technische Ausbildung, Spieltempo und den naechsten Schritt aus dem Grundlagen- in den Leistungsbereich.",
+      facts: [
+        ["Altersklasse", "U16 / Jahrgang 2010"],
+        ["Nachwuchs", "Panda Youngsters"],
+        ["Land", "Belgien"],
+      ],
+      strengths: [
+        "Die U16 ist in eine klare Nachwuchsstruktur eingebunden, die technische Entwicklung betont.",
+        "Belgische Nachwuchsteams suchen haeufig mutige Eins-gegen-eins-Loesungen und hohes Balltempo.",
+        "Der Jahrgang bringt internationale Reize in eine Gruppe mit deutschen und oesterreichischen U16-Teams.",
+      ],
+      sources: [
+        ["KAS Eupen", "https://www.as-eupen.be/"],
+        ["Panda Youngsters", "https://www.as-eupen.be/panda-youngsters/"],
+      ],
+    },
+    "eintracht-frankfurt": {
+      kicker: "Gruppe A | U16 Deutschland",
+      country: "Deutschland",
+      summary: "Eintracht Frankfurt tritt mit der U16 aus dem Nachwuchsleistungszentrum an. Die Altersklasse ist bei der Eintracht der direkte Entwicklungsschritt im B-Junioren-Bereich und wird leistungsorientiert betreut.",
+      facts: [
+        ["Altersklasse", "U16 / Jahrgang 2010"],
+        ["Struktur", "Nachwuchsleistungszentrum"],
+        ["Bereich", "B-Junioren-Nachwuchs"],
+      ],
+      strengths: [
+        "Die U16 trainiert in einem NLZ-Umfeld mit hoher Trainingsdichte und professioneller Betreuung.",
+        "Auf diesem Niveau sind schnelles Pressing und Anschlussaktionen nach Ballgewinn zentrale U16-Themen.",
+        "Der Jahrgang ist regelmaessige Vergleiche mit starken Nachwuchsteams gewohnt.",
+      ],
+      sources: [
+        ["Eintracht Nachwuchs", "https://nachwuchs.eintracht.de/"],
+        ["NLZ", "https://nachwuchs.eintracht.de/leistungszentrum"],
+      ],
+    },
+    "hannover-96": {
+      kicker: "Gruppe A | U16 Deutschland",
+      country: "Deutschland",
+      summary: "Hannover 96 kommt mit einer U16 aus der 96 Akademie. Die Mannschaft gehoert zum B-Junioren-Bereich und wird innerhalb der Akademie als eigener Jahrgang betreut.",
+      facts: [
+        ["Altersklasse", "U16 / Jahrgang 2010"],
+        ["Struktur", "96 Akademie"],
+        ["Bereich", "B-Junioren"],
+      ],
+      strengths: [
+        "Die U16 ist in eine Akademiestruktur eingebunden, in der individuelle Entwicklung und Teamtaktik zusammenlaufen.",
+        "Der Jahrgang bringt voraussichtlich viel Tempo und klare Rollen gegen den Ball mit.",
+        "Fuer das Turnier ist Hannover ein echter U16-Vergleich aus einem etablierten Nachwuchsleistungsumfeld.",
+      ],
+      sources: [
+        ["Hannover 96 Akademie", "https://www.hannover96.de/akademie/"],
+        ["Die Akademie", "https://www.hannover96.de/akademie/die-akademie"],
+      ],
+    },
+    "tsv-plattenhardt": {
+      kicker: "Gruppe A | U16 Gastgeber",
+      country: "Deutschland",
+      summary: "Die U16 des TSV Plattenhardt ist beim Pfingstturnier der Gastgeberjahrgang. Fuer die Spieler bedeutet das: kurze Wege, vertrautes Gelaende und Spiele gegen Nachwuchsmannschaften aus mehreren Laendern.",
+      facts: [
+        ["Altersklasse", "U16 / Jahrgang 2010"],
+        ["Rolle", "Gastgeberteam"],
+        ["Turnierort", "Sportgelaende Weilerhau"],
+      ],
+      strengths: [
+        "Die U16 kennt das Gelaende, die Wege und die Atmosphaere am Weilerhau.",
+        "Der Jahrgang hat die besondere Motivation, das eigene Pfingstturnier sportlich zu vertreten.",
+        "Gegen Akademieteams kann der Gastgeber in jedem Spiel mutig und ohne lange Anreise auftreten.",
+      ],
+      sources: [
+        ["TSV Plattenhardt", "https://www.tsvplattenhardt.de/"],
+        ["Pfingstturnier", "https://www.tsvplattenhardt.de/kopie-pfingstturnier"],
+      ],
+    },
+    "fc-basel": {
+      kicker: "Gruppe B | U16 Schweiz",
+      country: "Schweiz",
+      summary: "Die U16 des FC Basel ist Teil der Ausbildung am FCB-Campus. In dieser Altersstufe stehen Technik, Spielintelligenz und der Schritt in hoehere Nachwuchsbereiche im Mittelpunkt.",
+      facts: [
+        ["Altersklasse", "U16 / Jahrgang 2010"],
+        ["Struktur", "FCB-Campus"],
+        ["Land", "Schweiz"],
+      ],
+      strengths: [
+        "Die U16 kommt aus einem Campus-Umfeld, in dem Ballkontrolle und Spielverstaendnis stark gewichtet werden.",
+        "Der Jahrgang ist auf saubere Loesungen unter Druck und hohe Passqualitaet ausgelegt.",
+        "Als Schweizer U16 bringt Basel ein anderes Ausbildungsprofil in die Gruppe B.",
+      ],
+      sources: [
+        ["FC Basel", "https://www.fcb.ch/"],
+        ["Campus", "https://fcb.ch/pages/campus"],
+      ],
+    },
+    "viktoria-pilsen": {
+      kicker: "Gruppe B | U16 Tschechien",
+      country: "Tschechien",
+      summary: "Die U16 von FC Viktoria Pilsen gehoert zur Jugendstruktur des tschechischen Klubs. Im Turnier ist dieser Jahrgang der Vergleich aus Tschechien und bringt eine andere Nachwuchsschule nach Plattenhardt.",
+      facts: [
+        ["Altersklasse", "U16 / Jahrgang 2010"],
+        ["Nachwuchs", "Jugend- und Akademieteams"],
+        ["Land", "Tschechien"],
+      ],
+      strengths: [
+        "Die U16 steht fuer einen physischen und wettkampfnahen Vergleich aus dem tschechischen Nachwuchsfussball.",
+        "Der Jahrgang kann durch Direktheit, Koerperlichkeit und schnelles Nachruecken unangenehm werden.",
+        "Gegen deutsche und schweizer U16-Teams entsteht ein echter internationaler Leistungsvergleich.",
+      ],
+      sources: [
+        ["FC Viktoria Plzen", "https://www.fcviktoria.cz/eng/zobraz.asp?t=viktoria-v-kostce"],
+        ["Youth football", "https://www.fcviktoria.cz/eng/zobraz.asp?t=vykonnostni-fotbal"],
+      ],
+    },
+    "hessen-kassel": {
+      kicker: "Gruppe B | U16 Deutschland",
+      country: "Deutschland",
+      summary: "Die U16 des KSV Hessen Kassel ist Teil des Nachwuchsbereichs der Loewen. Fuer das Pfingstturnier zaehlt der Jahrgang als regional gepraegtes U16-Team mit Leistungsanspruch.",
+      facts: [
+        ["Altersklasse", "U16 / Jahrgang 2010"],
+        ["Nachwuchs", "KSV-Hessen-Jugend"],
+        ["Region", "Nordhessen"],
+      ],
+      strengths: [
+        "Die U16 bringt eine regionale Nachwuchsausbildung mit viel Teamnaehe mit.",
+        "Turnierspiele mit knappen Ergebnissen passen zu einem kompakten, robusten U16-Profil.",
+        "Der Jahrgang kann ueber Zusammenhalt, Einsatz und klare Ablaeufe in der Gruppe punkten.",
+      ],
+      sources: [
+        ["KSV Hessen", "https://www.ksvhessen.de/"],
+        ["Nachwuchs", "https://www.ksvhessen.de/nachwuchs/nachwuchs/"],
+      ],
+    },
+    "kaiserslautern": {
+      kicker: "Gruppe B | U16 Deutschland",
+      country: "Deutschland",
+      summary: "Die U16 des 1. FC Kaiserslautern kommt aus dem Nachwuchsleistungszentrum am Froehnerhof. In dieser Altersklasse geht es um den Uebergang in den leistungsorientierten B-Junioren-Bereich.",
+      facts: [
+        ["Altersklasse", "U16 / Jahrgang 2010"],
+        ["Struktur", "Nachwuchsleistungszentrum"],
+        ["Trainingsbasis", "Froehnerhof"],
+      ],
+      strengths: [
+        "Die U16 ist an ein NLZ-Umfeld mit klarer Leistungssteuerung und intensiver Trainingsarbeit angebunden.",
+        "Der Jahrgang bringt Mentalitaet, Athletik und Spielintelligenz aus dem B-Junioren-Aufbau mit.",
+        "Im Turnier ist Kaiserslautern ein starker U16-Massstab aus einem grossen Nachwuchszentrum.",
+      ],
+      sources: [
+        ["FCK", "https://fck.de/"],
+        ["Leistungszentrum", "https://fck.de/fussball/nachwuchsleistungszentrum/"],
+      ],
+    },
+    "ssv-reutlingen": {
+      kicker: "Gruppe B | U16 Deutschland",
+      country: "Deutschland",
+      summary: "Die U16 des SSV Reutlingen 05 kommt aus dem Nachwuchsbereich des wuerttembergischen Vereins. Beim Pfingstturnier trifft dieser Jahrgang auf Akademie- und Ausbildungsteams aus mehreren Laendern.",
+      facts: [
+        ["Altersklasse", "U16 / Jahrgang 2010"],
+        ["Nachwuchs", "SSV-Akademie-Umfeld"],
+        ["Region", "Wuerttemberg"],
+      ],
+      strengths: [
+        "Die U16 kann ueber Einsatz, Tempo und regionale Identitaet ins Turnier kommen.",
+        "Gegen grosse Nachwuchsadressen ist der Jahrgang ein spannender Leistungsvergleich aus Wuerttemberg.",
+        "Kurze Wege im Vereinsumfeld helfen, als Team geschlossen aufzutreten.",
+      ],
+      sources: [
+        ["SSV Reutlingen", "https://www.ssv-reutlingen-fussball.de/"],
+        ["SSV Akademie", "https://www.ssv-reutlingen-fussball.de/ssv-akademie/fussballschule/"],
+      ],
+    },
+  };
+
+  function setupTeamDialog() {
+    const dialog = document.querySelector("[data-team-dialog]");
+    if (!dialog) return;
+
+    const fields = {
+      close: dialog.querySelector("[data-team-close]"),
+      logo: dialog.querySelector("[data-team-logo]"),
+      country: dialog.querySelector("[data-team-country]"),
+      kicker: dialog.querySelector("[data-team-kicker]"),
+      name: dialog.querySelector("[data-team-name]"),
+      summary: dialog.querySelector("[data-team-summary]"),
+      facts: dialog.querySelector("[data-team-facts]"),
+      strengths: dialog.querySelector("[data-team-strengths]"),
+      sources: dialog.querySelector("[data-team-sources]"),
+    };
+
+    function clearNode(node) {
+      while (node?.firstChild) node.removeChild(node.firstChild);
+    }
+
+    function fillList(node, items, renderItem) {
+      clearNode(node);
+      items.forEach((item) => node.appendChild(renderItem(item)));
+    }
+
+    function openTeam(card) {
+      const profile = teamProfiles[card.dataset.teamInfo];
+      if (!profile) return;
+
+      const logo = card.querySelector("img");
+      fields.logo.src = logo?.getAttribute("src") || "";
+      fields.logo.alt = logo?.getAttribute("alt") || "";
+      fields.country.textContent = profile.country;
+      fields.kicker.textContent = profile.kicker;
+      fields.name.textContent = card.querySelector("h4")?.textContent || "";
+      fields.summary.textContent = profile.summary;
+
+      fillList(fields.facts, profile.facts, ([label, value]) => {
+        const item = document.createElement("article");
+        const labelNode = document.createElement("span");
+        const valueNode = document.createElement("b");
+        labelNode.textContent = label;
+        valueNode.textContent = value;
+        item.append(labelNode, valueNode);
+        return item;
+      });
+
+      fillList(fields.strengths, profile.strengths, (text) => {
+        const item = document.createElement("li");
+        item.textContent = text;
+        return item;
+      });
+
+      fillList(fields.sources, profile.sources, ([label, url]) => {
+        const link = document.createElement("a");
+        link.href = url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = label;
+        return link;
+      });
+
+      if (typeof dialog.showModal === "function") {
+        dialog.showModal();
+      } else {
+        dialog.setAttribute("open", "");
+      }
+    }
+
+    function closeDialog() {
+      if (typeof dialog.close === "function") dialog.close();
+      else dialog.removeAttribute("open");
+    }
+
+    document.querySelectorAll("[data-team-info]").forEach((card) => {
+      card.addEventListener("click", () => openTeam(card));
+      card.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        openTeam(card);
+      });
+    });
+
+    fields.close?.addEventListener("click", closeDialog);
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) closeDialog();
+    });
+  }
+
   document.querySelectorAll(".tab").forEach((tab) => {
     tab.addEventListener("click", () => activatePanel(tab));
   });
 
   setupMobileMenu();
   setupScrollTop();
+  setupTeamDialog();
   protectVisualAssets();
   updateCountdown();
   setInterval(updateCountdown, 1000);

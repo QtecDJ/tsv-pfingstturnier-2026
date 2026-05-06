@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="TSV Plattenhardt Tor-Schiessen als Webspiel im Vereinsstil.">
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://mantledb.sh; img-src 'self' data:; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+    <meta name="theme-color" content="#b8121b">
+    <title>Tor-Schiessen | TSV Plattenhardt</title>
+    <link rel="icon" href="../assets/logos/tsv-plattenhardt.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="game.css">
+  </head>
+  <body class="game-page">
+    <header class="site-header game-header" aria-label="Spielnavigation">
+      <a class="brand" href="../index.html" aria-label="Zurueck zur Turnierseite">
+        <img src="../assets/logos/tsv-plattenhardt.jpg" alt="TSV Plattenhardt Logo">
+        <span>
+          <strong>TSV Plattenhardt</strong>
+          <small>Tor-Schiessen</small>
+        </span>
+      </a>
+      <nav>
+        <a href="../index.html#turnier">Turnier</a>
+        <a href="../index.html#teams">Teams</a>
+        <a href="../index.html#spielplan">Spielplan</a>
+        <a href="../index.html#programm">Programm</a>
+        <a href="game.html" aria-current="page">Spiel</a>
+      </nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menue oeffnen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a class="header-cta" href="../index.html">Zur Turnierseite</a>
+      <div class="mobile-menu" id="mobile-menu" hidden>
+        <a href="../index.html#turnier">Turnier</a>
+        <a href="../index.html#teams">Teams</a>
+        <a href="../index.html#spielplan">Spielplan</a>
+        <a href="../index.html#programm">Programm</a>
+        <a href="game.html" aria-current="page">Spiel</a>
+        <a href="../index.html">Zur Turnierseite</a>
+      </div>
+    </header>
+
+    <main class="game-shell">
+      <section class="game-board" aria-label="TSV Tor-Schiessen">
+        <canvas id="goal-game" width="1120" height="720" aria-label="Tor-Schiessen Spielfeld"></canvas>
+        <div class="game-start-panel" data-start-panel>
+          <div class="start-card">
+            <span>TSV Tor-Schiessen</span>
+            <h1>Dein Name fuer das Leaderboard</h1>
+            <label for="player-name">Spielername</label>
+            <input id="player-name" data-player-name maxlength="18" value="TSV Spieler">
+            <button class="btn primary" type="button" data-start-game>Spiel starten</button>
+          </div>
+        </div>
+        <div class="game-hud">
+          <div class="player-row compact">
+            <span>Name</span>
+            <b data-player-display>TSV Spieler</b>
+          </div>
+          <section class="score-panel" aria-label="Spielstand">
+          <article>
+            <span>Punkte</span>
+            <b data-score>0</b>
+          </article>
+          <article>
+            <span>Treffer</span>
+            <b data-goals>0</b>
+          </article>
+          <article>
+            <span>Schuesse</span>
+            <b><span data-shots>7</span>/7</b>
+          </article>
+          </section>
+          <div class="tournament-card compact">
+            <span data-round-label>Viertelfinale</span>
+            <b data-opponent>SV Horn</b>
+          </div>
+        </div>
+        <div class="game-overlay">
+          <div class="power-meter" aria-hidden="true">
+            <span data-power></span>
+          </div>
+          <p class="game-message" data-message>Bereit im Weilerhau.</p>
+          <div class="game-actions">
+            <button class="btn primary" type="button" data-restart>Neues Spiel</button>
+            <a class="btn secondary" href="../index.html">Zurueck</a>
+          </div>
+        </div>
+      </section>
+      <p class="sr-only" data-mode-status>Turniermodus: Gewinne jede Runde nur ueber deine Punktzahl.</p>
+    </main>
+
+    <script src="game.js?v=14"></script>
+  </body>
+</html>

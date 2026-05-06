@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="de">
   <head>
     <meta charset="utf-8">
@@ -54,9 +54,30 @@
       <!-- Hero mit TSV-Bildsprache: Der Platz im Weilerhau soll sofort als Ort des Turniers erkennbar sein. -->
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-media" role="img" aria-label="Aktuelle Pfingstturnier-Plakate der TSV Plattenhardt">
-          <img class="hero-slide slide-one" src="assets/hero/tsv-pfingstturnier-2026.jpg" alt="">
-          <img class="hero-slide slide-two" src="assets/hero/kindertag-2026.jpg" alt="">
-          <img class="hero-slide slide-three" src="assets/hero/pfingstparty-uebersicht-2026.jpg" alt="">
+          <div class="hero-photo-track" aria-hidden="true">
+            <img class="hero-photo" src="assets/hero/tsv-slider-01-img-1860.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-02-img-1935-neu.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-03-img-1940-neu.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-04-img-1943-neu.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-05-img-1947-neu.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-06-img-1954-neu.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-07-img-6078.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-08-img-6084.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-09-img-6094.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-10-img-6103.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-11-img-6113.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-12-img-6115.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-13-img-6328.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-14-img-6421.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-15-img-6441.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-16-img-6454.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-17-img-6481.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-18-img-6595.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-19-img-6641.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-20-img-6694.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-21-img-6719.jpg" alt="">
+            <img class="hero-photo" src="assets/hero/tsv-slider-22-img-6737.jpg" alt="">
+          </div>
           <div class="poster-stage" aria-hidden="true">
             <img class="poster-card poster-one" src="assets/hero/tsv-pfingstturnier-2026.jpg" alt="">
             <img class="poster-card poster-two" src="assets/hero/kindertag-2026.jpg" alt="">
@@ -130,30 +151,35 @@
           <section class="group-card" aria-labelledby="group-a">
             <h3 id="group-a">Gruppe A</h3>
             <div class="team-grid">
-              <article class="team-card host">
+              <article class="team-card host" data-team-info="sv-horn" tabindex="0" role="button" aria-label="Infos zu SV Horn anzeigen">
                 <img src="assets/logos/sv-horn.png" alt="SV Horn Logo">
                 <span>Oesterreich</span>
                 <h4>SV Horn</h4>
+                <small>Infos anzeigen</small>
               </article>
-              <article class="team-card">
+              <article class="team-card" data-team-info="kas-eupen" tabindex="0" role="button" aria-label="Infos zu KAS Eupen anzeigen">
                 <img src="assets/logos/kas-eupen.png" alt="KAS Eupen Logo">
                 <span>Belgien</span>
                 <h4>KAS Eupen</h4>
+                <small>Infos anzeigen</small>
               </article>
-              <article class="team-card">
+              <article class="team-card" data-team-info="eintracht-frankfurt" tabindex="0" role="button" aria-label="Infos zu Eintracht Frankfurt anzeigen">
                 <img src="assets/logos/eintracht-frankfurt.png" alt="Eintracht Frankfurt Logo">
                 <span>Deutschland</span>
                 <h4>Eintracht Frankfurt</h4>
+                <small>Infos anzeigen</small>
               </article>
-              <article class="team-card">
+              <article class="team-card" data-team-info="hannover-96" tabindex="0" role="button" aria-label="Infos zu Hannover 96 anzeigen">
                 <img src="assets/logos/hannover-96.png" alt="Hannover 96 Logo">
                 <span>Deutschland</span>
                 <h4>Hannover 96</h4>
+                <small>Infos anzeigen</small>
               </article>
-              <article class="team-card home-team">
+              <article class="team-card home-team" data-team-info="tsv-plattenhardt" tabindex="0" role="button" aria-label="Infos zu TSV Plattenhardt anzeigen">
                 <img src="assets/logos/tsv-plattenhardt.jpg" alt="TSV Plattenhardt Logo">
                 <span>Gastgeber</span>
                 <h4>TSV Plattenhardt</h4>
+                <small>Infos anzeigen</small>
               </article>
             </div>
           </section>
@@ -161,35 +187,61 @@
           <section class="group-card" aria-labelledby="group-b">
             <h3 id="group-b">Gruppe B</h3>
             <div class="team-grid">
-              <article class="team-card">
+              <article class="team-card" data-team-info="fc-basel" tabindex="0" role="button" aria-label="Infos zu FC Basel anzeigen">
                 <img src="assets/logos/fc-basel.png" alt="FC Basel Logo">
                 <span>Schweiz</span>
                 <h4>FC Basel</h4>
+                <small>Infos anzeigen</small>
               </article>
-              <article class="team-card">
+              <article class="team-card" data-team-info="viktoria-pilsen" tabindex="0" role="button" aria-label="Infos zu FC Viktoria Pilsen anzeigen">
                 <img src="assets/logos/viktoria-pilsen.png" alt="FC Viktoria Pilsen Logo">
                 <span>Tschechien</span>
                 <h4>FC Viktoria Pilsen</h4>
+                <small>Infos anzeigen</small>
               </article>
-              <article class="team-card">
+              <article class="team-card" data-team-info="hessen-kassel" tabindex="0" role="button" aria-label="Infos zu KSV Hessen Kassel anzeigen">
                 <img src="assets/logos/hessen-kassel.png" alt="KSV Hessen Kassel Logo">
                 <span>Deutschland</span>
                 <h4>KSV Hessen Kassel</h4>
+                <small>Infos anzeigen</small>
               </article>
-              <article class="team-card">
+              <article class="team-card" data-team-info="kaiserslautern" tabindex="0" role="button" aria-label="Infos zu 1. FC Kaiserslautern anzeigen">
                 <img src="assets/logos/kaiserslautern.png" alt="1. FC Kaiserslautern Logo">
                 <span>Deutschland</span>
                 <h4>1. FC Kaiserslautern</h4>
+                <small>Infos anzeigen</small>
               </article>
-              <article class="team-card">
+              <article class="team-card" data-team-info="ssv-reutlingen" tabindex="0" role="button" aria-label="Infos zu SSV Reutlingen 05 anzeigen">
                 <img src="assets/logos/ssv-reutlingen.png" alt="SSV Reutlingen 05 Logo">
                 <span>Deutschland</span>
                 <h4>SSV Reutlingen 05</h4>
+                <small>Infos anzeigen</small>
               </article>
             </div>
           </section>
         </div>
       </section>
+
+      <dialog class="team-dialog" data-team-dialog aria-labelledby="team-dialog-title">
+        <button class="team-dialog-close" type="button" data-team-close aria-label="Fenster schliessen">x</button>
+        <div class="team-dialog-grid">
+          <aside class="team-dialog-badge">
+            <img data-team-logo alt="">
+            <span data-team-country></span>
+          </aside>
+          <div class="team-dialog-content">
+            <p class="eyebrow" data-team-kicker></p>
+            <h2 id="team-dialog-title" data-team-name></h2>
+            <p data-team-summary></p>
+            <div class="team-fact-grid" data-team-facts></div>
+            <section class="team-strengths">
+              <h3>U16-Profil</h3>
+              <ul data-team-strengths></ul>
+            </section>
+            <div class="team-sources" data-team-sources></div>
+          </div>
+        </div>
+      </dialog>
 
       <!-- Turniercenter: Matchboard statt Textliste, damit der sportliche Verlauf sofort sichtbar wird. -->
       <section class="section tournament-center" id="spielplan">
@@ -309,7 +361,7 @@
               <img src="assets/events/80s-90s-schlager.png" alt="80s 90s meets Schlager Party">
             </div>
             <div class="event-body">
-              <time>Samstag, 23. Mai 2026 · 20:00 Uhr</time>
+              <time>Samstag, 23. Mai 2026 Â· 20:00 Uhr</time>
               <h3>80s/90s meets Schlager</h3>
               <p>Nach dem Auftakt auf dem Platz geht es musikalisch weiter. 80er, 90er und Schlager sorgen fuer den ersten grossen Turnierabend.</p>
               <span>Eintritt laut Veranstaltungsseite: 5 Euro</span>
@@ -321,7 +373,7 @@
               <img src="assets/events/fillys-beachparty.png" alt="Filly's Beachparty">
             </div>
             <div class="event-body">
-              <time>Sonntag, 24. Mai 2026 · 20:00 Uhr</time>
+              <time>Sonntag, 24. Mai 2026 Â· 20:00 Uhr</time>
               <h3>Filly's Beachparty</h3>
               <p>Der Sonntagabend bringt Beachparty-Stimmung nach Plattenhardt. Nach den Spielen wird das Sportgelaende zur Sommernacht im TSV-Stil.</p>
               <span>Abendveranstaltung am Sportgelaende</span>
@@ -388,7 +440,7 @@
     </footer>
 
     <button class="scroll-top" type="button" aria-label="Nach oben scrollen" hidden>
-      <span aria-hidden="true">↑</span>
+      <span aria-hidden="true">â†‘</span>
     </button>
 
     <script src="script.js"></script>
